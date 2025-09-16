@@ -1,13 +1,15 @@
-import pygame
+import pygame 
+from cell import *
 
 def main():
     # Initialize pygame
     pygame.init()
     time_clock = pygame.time.Clock()
 
-    # Screen Dimensions
-    screen_width = 800
-    screen_height = 600
+    # Screen Dimensions - Set to system display dimensions
+    screen_info = pygame.display.Info()
+    screen_width = screen_info.current_w
+    screen_height = screen_info.current_h
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Battle of Life")
 
@@ -18,7 +20,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        screen.fill((0, 0, 0))
+        screen.fill((255, 255, 255))
 
         #Update the display
         pygame.display.flip()
