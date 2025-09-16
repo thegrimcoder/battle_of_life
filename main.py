@@ -1,6 +1,10 @@
 import pygame 
 from cell import *
 
+GRID_WIDTH = 100
+GRID_HEIGHT = 100
+CELL_SIZE = 10
+
 def main():
     # Initialize pygame
     pygame.init()
