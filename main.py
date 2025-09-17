@@ -17,6 +17,14 @@ def main():
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Battle of Life")
 
+    #Create starting grid
+    grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+
+    #Initialize all cells in the grid to Cells
+    for x in range(GRID_WIDTH-1):
+        for y in range(GRID_HEIGHT-1):
+            grid[x][y] = Cell(x, y, CELL_SIZE)
+
     # Game loop
     running = True
     while running:
@@ -24,7 +32,10 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        screen.fill((255, 255, 255))
+        #Create a second grid store the next state of the game board
+        next_grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+
+        
 
         #Update the display
         pygame.display.flip()
