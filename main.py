@@ -1,12 +1,13 @@
 import pygame 
 from cell import *
+from player_choice import *
 
 GRID_WIDTH = 25
 GRID_HEIGHT = 25
 CELL_SIZE = 20
-SCREEN_RATIO = 1
-SCREEN_WIDTH_OFFSET = 0
-SCREEN_HEIGHT_OFFSET = 0
+#SCREEN_RATIO = 1
+#SCREEN_WIDTH_OFFSET = 0
+#SCREEN_HEIGHT_OFFSET = 0
 
 def draw_grid(screen, grid):
     #Clear Screen
@@ -24,7 +25,7 @@ def draw_grid(screen, grid):
                 color = (255, 255, 255)
 
             #Calculate cell position based on screen size
-            rect = pygame.Rect(x*CELL_SIZE*SCREEN_RATIO+SCREEN_WIDTH_OFFSET, y*CELL_SIZE*SCREEN_RATIO+SCREEN_HEIGHT_OFFSET, CELL_SIZE*SCREEN_RATIO, CELL_SIZE*SCREEN_RATIO)
+            rect = pygame.Rect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE)
             #rect = pygame.Rect(x*CELL_SIZE*SCREEN_RATIO+SCREEN_WIDTH_OFFSET, y*CELL_SIZE*SCREEN_RATIO+SCREEN_HEIGHT_OFFSET, CELL_SIZE*SCREEN_RATIO+SCREEN_WIDTH_OFFSET, CELL_SIZE*SCREEN_RATIO+SCREEN_HEIGHT_OFFSET)
 
             #Draw the cell
@@ -39,24 +40,23 @@ def main():
     time_clock = pygame.time.Clock()
 
     #Screen Dimensions - Set to system display dimensions
-    screen_info = pygame.display.Info()
-    print(screen_info)
-    screen_width = screen_info.current_w
-    screen_height = screen_info.current_h
+    #screen_info = pygame.display.Info() - Do I need this or should I use the width and height of the grid???
+    screen_width = GRID_WIDTH*CELL_SIZE
+    screen_height = GRID_HEIGHT*CELL_SIZE
 
     #Update screen ratio based on dynamic screen size
-    global SCREEN_RATIO
-    SCREEN_RATIO = screen_width/screen_height
+    #global SCREEN_RATIO
+    #SCREEN_RATIO = screen_width/screen_height
     
     #Update screen offset based on dynamic screen size - centers grid
-    grid_screen_width = GRID_WIDTH*CELL_SIZE
-    grid_screen_height = GRID_HEIGHT*CELL_SIZE
+    #grid_screen_width = GRID_WIDTH*CELL_SIZE
+    #grid_screen_height = GRID_HEIGHT*CELL_SIZE
 
-    global SCREEN_WIDTH_OFFSET
-    SCREEN_WIDTH_OFFSET = (screen_width-grid_screen_width)/2
+    #global SCREEN_WIDTH_OFFSET
+    #SCREEN_WIDTH_OFFSET = (screen_width-grid_screen_width)/2
 
-    global SCREEN_HEIGHT_OFFSET
-    SCREEN_HEIGHT_OFFSET = 10
+    #global SCREEN_HEIGHT_OFFSET
+    #SCREEN_HEIGHT_OFFSET = 10
 
     screen = pygame.display.set_mode((screen_width, screen_height), pygame.SCALED)
     pygame.display.set_caption("Battle of Life")
@@ -72,6 +72,15 @@ def main():
         for y in range(GRID_HEIGHT):
             grid[x][y] = Cell(x, y, CELL_SIZE)
             next_grid[x][y] = Cell(x, y, CELL_SIZE)
+
+    #Draw Initial Window
+    pygame.display.flip()
+
+    #Draw Initial Grid
+    draw_grid(screen, next_grid)
+
+    #Prompt user for team choice
+    get_player_choice(screen)
 
     # Game loop
     running = True
