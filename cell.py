@@ -26,11 +26,11 @@ class Cell:
         #Sets correct team
         self.team = team
         match self.team:
-            case 'Green':
+            case 'green':
                 self.color = (255, 0, 0)
-            case 'Red':
+            case 'red':
                 self.color = (0, 255, 0)
-            case 'Blue':
+            case 'blue':
                 self.color = (0, 0, 255)
 
     def get_alive(self):

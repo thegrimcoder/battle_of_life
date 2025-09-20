@@ -1,10 +1,15 @@
-import pygame 
+import pygame
+import random
 from cell import *
 from player_choice import *
+from game_rules import *
 
 GRID_WIDTH = 25
 GRID_HEIGHT = 25
 CELL_SIZE = 20
+PLAYER_TEAM = None
+COMPUTER_TEAM = None
+
 #SCREEN_RATIO = 1
 #SCREEN_WIDTH_OFFSET = 0
 #SCREEN_HEIGHT_OFFSET = 0
@@ -79,8 +84,37 @@ def main():
     #Draw Initial Grid
     draw_grid(screen, next_grid)
 
+    #Display game rules
+    display_game_rules(screen)
+
     #Prompt user for team choice
-    get_player_choice(screen)
+    global PLAYER_TEAM
+    PLAYER_TEAM = get_player_choice(screen)
+
+    #Computer Player Choice - Psuedo random - Coin flip between remaining teams
+    rand_int = random.randint(1,2)
+    match PLAYER_TEAM:
+        case 'green':
+            match rand_int:
+                case 1:
+                    COMPUTER_TEAM = 'red'
+                case 2:
+                    COMPUTER_TEAM = 'blue'
+        case 'red':
+            match rand_int:
+                case 1:
+                    COMPUTER_TEAM = 'green'
+                case 2:
+                    COMPUTER_TEAM = 'blue'
+        case 'blue':
+            match rand_int:
+                case 1:
+                    COMPUTER_TEAM = 'green'
+                case 2:
+                    COMPUTER_TEAM = 'red'
+
+    print(f"Player Team: {PLAYER_TEAM}\n")
+    print(f"Computer Team: {COMPUTER_TEAM}\n")
 
     # Game loop
     running = True
