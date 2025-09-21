@@ -51,5 +51,7 @@ def display_game_rules(screen):
         ok_text_rect = ok_text.get_rect(center=ok_button_rect.center)
         screen.blit(ok_text, ok_text_rect)      
 
+        #Draw Main Rules
+
         #Update display
         pygame.display.flip()
