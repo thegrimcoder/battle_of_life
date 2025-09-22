@@ -52,6 +52,8 @@ def display_game_rules(screen):
         screen.blit(ok_text, ok_text_rect)      
 
         #Draw Main Rules
+        font_Rules = pygame.font.Font(None, 14)
+        
 
         #Update display
         pygame.display.flip()
